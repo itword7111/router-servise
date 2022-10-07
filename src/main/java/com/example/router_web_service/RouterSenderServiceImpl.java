@@ -9,9 +9,7 @@ import com.pengrad.telegrambot.request.SendDocument;
 import com.pengrad.telegrambot.request.SendMessage;
 
 import javax.jws.WebService;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
@@ -83,8 +81,13 @@ public class RouterSenderServiceImpl implements RouterSenderService {
 
     public void pdf(byte[] pdfBytes, List<String> lectorNickName) throws IOException {
         for (String lector: lectorNickName) {
+            String s=System.getProperty("user.dir");
+            OutputStream out = new FileOutputStream("report.pdf");
+            out.write(pdfBytes);
+            out.close();
+            File file2=new File(System.getProperty("user.dir"),"report.pdf");
             String chatId =connectionToCommandService.getChatIdByUserName(lector);
-            SendDocument response = new SendDocument(chatId,pdfBytes);
+            SendDocument response = new SendDocument(chatId,file2);
             TelegramBotSingleton.getInstance().execute(response);
         }
     }

@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="router_web_service:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>router_web_service</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="web-service-router.war">
+      <element id="artifact" artifact-name="router_web_service:war exploded" />
+    </root>
+  </artifact>
+</component>

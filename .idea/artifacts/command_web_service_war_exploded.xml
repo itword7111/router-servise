@@ -1,0 +1,68 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="command_web_service:war exploded">
+    <output-path>$PROJECT_DIR$/target/web-service-command</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>command_web_service</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="command_web_service" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.annotation:javax.annotation-api:1.3.2" />
+          <element id="library" level="project" name="Maven: com.sun.xml.ws:jaxws-tools:2.3.1" />
+          <element id="library" level="project" name="Maven: com.sun.xml.bind:jaxb-xjc:2.3.1" />
+          <element id="library" level="project" name="Maven: com.sun.xml.bind:jaxb-jxc:2.3.1" />
+          <element id="library" level="project" name="Maven: com.sun.xml.ws:jaxws-eclipselink-plugin:2.3.1" />
+          <element id="library" level="project" name="Maven: javax.mail:mail:1.4.7" />
+          <element id="library" level="project" name="Maven: javax.persistence:javax.persistence-api:2.2" />
+          <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.moxy:2.7.2" />
+          <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.core:2.7.2" />
+          <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.asm:2.7.2" />
+          <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
+          <element id="library" level="project" name="Maven: org.glassfish:javax.json:1.0.4" />
+          <element id="library" level="project" name="Maven: com.sun.xml.ws:sdo-eclipselink-plugin:2.3.1" />
+          <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.sdo:2.7.2" />
+          <element id="library" level="project" name="Maven: org.eclipse.persistence:commonj.sdo:2.1.1" />
+          <element id="library" level="project" name="Maven: commonj.sdo:commonj.sdo:2.1.1.v201112051852" />
+          <element id="library" level="project" name="Maven: javax.xml.ws:jaxws-api:2.3.1" />
+          <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.3.1" />
+          <element id="library" level="project" name="Maven: javax.activation:javax.activation-api:1.2.0" />
+          <element id="library" level="project" name="Maven: javax.xml.soap:javax.xml.soap-api:1.4.0" />
+          <element id="library" level="project" name="Maven: javax.jws:javax.jws-api:1.1" />
+          <element id="library" level="project" name="Maven: com.sun.xml.ws:jaxws-rt:2.3.5" />
+          <element id="library" level="project" name="Maven: com.sun.xml.ws:policy:2.7.10" />
+          <element id="library" level="project" name="Maven: com.sun.xml.bind:jaxb-impl:2.3.5" />
+          <element id="library" level="project" name="Maven: org.glassfish.ha:ha-api:3.1.13" />
+          <element id="library" level="project" name="Maven: org.glassfish.external:management-api:3.2.3" />
+          <element id="library" level="project" name="Maven: org.glassfish.gmbal:gmbal-api-only:4.0.3" />
+          <element id="library" level="project" name="Maven: org.jvnet.staxex:stax-ex:1.8.3" />
+          <element id="library" level="project" name="Maven: com.sun.xml.stream.buffer:streambuffer:1.5.10" />
+          <element id="library" level="project" name="Maven: org.jvnet.mimepull:mimepull:1.9.15" />
+          <element id="library" level="project" name="Maven: com.sun.xml.fastinfoset:FastInfoset:1.2.18" />
+          <element id="library" level="project" name="Maven: com.sun.activation:jakarta.activation:1.2.2" />
+          <element id="library" level="project" name="Maven: com.sun.mail:jakarta.mail:1.6.7" />
+          <element id="library" level="project" name="Maven: com.sun.xml.messaging.saaj:saaj-impl:1.5.3" />
+          <element id="library" level="project" name="Maven: com.fasterxml.woodstox:woodstox-core:6.2.6" />
+          <element id="library" level="project" name="Maven: org.codehaus.woodstox:stax2-api:4.2.1" />
+          <element id="library" level="project" name="Maven: jakarta.xml.ws:jakarta.xml.ws-api:2.3.3" />
+          <element id="library" level="project" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:2.3.3" />
+          <element id="library" level="project" name="Maven: jakarta.xml.soap:jakarta.xml.soap-api:1.4.2" />
+          <element id="library" level="project" name="Maven: jakarta.jws:jakarta.jws-api:2.1.0" />
+          <element id="library" level="project" name="Maven: jakarta.annotation:jakarta.annotation-api:1.3.5" />
+          <element id="library" level="project" name="Maven: org.postgresql:postgresql:42.5.0" />
+          <element id="library" level="project" name="Maven: org.checkerframework:checker-qual:3.5.0" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/web-service-command/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="command_web_service/web/Web" />
+    </root>
+  </artifact>
+</component>

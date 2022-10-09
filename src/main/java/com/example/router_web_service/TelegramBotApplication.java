@@ -98,7 +98,7 @@ public class TelegramBotApplication extends TelegramBot {
         switch (botState){
             //for user
             case ADD_TASK:{
-                RouteRequest("POST","http://localhost:8086/accounting_war/insertNewTrack",new ReportSender(userName,parameter,Timestamp.valueOf(LocalDateTime.now())));
+                RouteRequest("POST","http://localhost:8080/Accounting/insertNewTrack",new ReportSender(userName,parameter,Timestamp.valueOf(LocalDateTime.now())));
                 botStateCash.remove(userName);
                 break;
             }
@@ -110,14 +110,14 @@ public class TelegramBotApplication extends TelegramBot {
             case ADD_USER_TO_GROUP:{
                 String role=connectionToCommandService.getRoleNameByUserName(parameter);
                 connectionToCommandService.updateUser(parameter,groupCash.get(userName),role);
-                SendMessage response = new SendMessage(chatId,"введите имя пользователя для добавления в группу \nдля выхода из режима добавления введите /quit");
+                SendMessage response = new SendMessage(chatId,"введите никнейм для добавления в группу (без @) \nдля выхода из режима добавления введите /quit");
                 this.execute(response);
                 break;
             }
             case DELETE_USER_FROM_GROUP:{
                 String role=connectionToCommandService.getRoleNameByUserName(parameter);
                 connectionToCommandService.updateUser(parameter,"null",role);
-                SendMessage response = new SendMessage(chatId,"введите имя пользователя для удаления из группы \nдля выхода из режима удаления введите /quit");
+                SendMessage response = new SendMessage(chatId,"введите имя пользователя для удаления из группы (без @) \nдля выхода из режима удаления введите /quit");
                 this.execute(response);
                 break;
             }
@@ -146,7 +146,7 @@ public class TelegramBotApplication extends TelegramBot {
             case ADD_USERNAME_FOR_CREATION_USER:{
                 usernameForCreationCash.put(userName,parameter);
                 botStateCash.put(userName,BotState.ADD_ROLE_OF_USER_FOR_CREATION_USER);
-                SendMessage response = new SendMessage(chatId,"введите роль пользователя (user, admin или lector) для выхода из операции введите /quit");
+                SendMessage response = new SendMessage(chatId,"введите роль пользователя (user, lead или lector) для выхода из операции введите /quit");
                 this.execute(response);
                 break;
             }
@@ -159,7 +159,7 @@ public class TelegramBotApplication extends TelegramBot {
             }
             case ADD_GROUP_OF_USER_FOR_CREATION_USER:{
                 connectionToCommandService.insertUser(usernameForCreationCash.get(userName),parameter,roleCash.get(userName));
-                RouteRequest("POST","http://localhost:8086/accounting_war/insertNewUser",new UserForAccounting(usernameForCreationCash.get(userName)));
+                RouteRequest("POST","http://localhost:8080/Accounting/insertNewUser",new UserForAccounting(usernameForCreationCash.get(userName)));
                 usernameForCreationCash.remove(userName);
                 botStateCash.remove(userName);
                 roleCash.remove(userName);
@@ -183,12 +183,19 @@ public class TelegramBotApplication extends TelegramBot {
     private void executeCommand(String commandName, Long chatId, String userName){
         switch (commandName) {
             case "/start": {
+                try {
+                    connectionToCommandService.getRoleNameByUserName(userName);
+                }
+                catch (Exception e){
+                    connectionToCommandService.insertUser(userName,"winners","lector");
+                    RouteRequest("POST","http://localhost:8080/Accounting/insertNewUser",new UserForAccounting(userName));
+                }
+
                 connectionToCommandService.putChatIdByUserName(chatId.toString(),userName);
                 String responseFromRouter=connectionToCommandService.getRoleNameByUserName(userName);
                 String role =gson.fromJson(responseFromRouter, String.class);
-                if(role.equals("admin")){
-                    SendMessage response = new SendMessage(chatId, "Ваша роль admin\n" +
-                            "Доступные вам команды:\n" +
+                if(role.equals("lead")||role.equals("lector")){
+                    SendMessage response = new SendMessage(chatId, "Доступные вам команды:\n" +
                             "/get_groups\n" +
                             "/get_users\n" +
                             "для добавления и удаления пользователей из группы,\n" +
@@ -227,17 +234,17 @@ public class TelegramBotApplication extends TelegramBot {
                 ListOfString users = connectionToCommandService.getUserNameListByRoleName("user");
                 StringBuilder messageUsers=new StringBuilder();
                 for (String user:users.getItem()) {
-                    messageUsers.append(user).append("\n");
+                    messageUsers.append("@").append(user).append("\n");
                 }
-                ListOfString admins=  connectionToCommandService.getUserNameListByRoleName("admin");
+                ListOfString admins=  connectionToCommandService.getUserNameListByRoleName("lead");
                 StringBuilder messageAdmins=new StringBuilder();
                 for (String admin:admins.getItem()) {
-                    messageAdmins.append(admin).append("\n");
+                    messageAdmins.append("@").append(admin).append("\n");
                 }
                 ListOfString lectors=  connectionToCommandService.getUserNameListByRoleName("lector");
                 StringBuilder messageLectors=new StringBuilder();
                 for (String lector:lectors.getItem()) {
-                    messageLectors.append(lector).append("\n");
+                    messageLectors.append("@").append(lector).append("\n");
                 }
                 SendMessage response = new SendMessage(chatId, "Пользователи :\n"+messageUsers+" Тимлиды :\n"+messageAdmins+" Лектора :\n"+messageLectors);
                 this.execute(response);

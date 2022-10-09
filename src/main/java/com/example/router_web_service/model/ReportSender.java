@@ -1,6 +1,7 @@
 package com.example.router_web_service.model;
 
 
+import java.sql.Time;
 import java.sql.Timestamp;
 
 public class ReportSender {
@@ -8,7 +9,8 @@ private String userName;
 private String task;
 private Timestamp timeOfTrack;
 
-    public ReportSender(String userName, String task, Timestamp timeOfTrack) {
+
+    public ReportSender(String userName,  String task, Timestamp timeOfTrack) {
         this.userName = userName;
         this.task = task;
         this.timeOfTrack = timeOfTrack;
